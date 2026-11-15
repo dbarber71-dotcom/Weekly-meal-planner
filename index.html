@@ -1,70 +1,53 @@
 <!doctype html>
-<html lang="en-GB">
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#f5f3ed">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="Tea Planner">
-  <link rel="manifest" href="/manifest.json">
-  <link rel="apple-touch-icon" href="/icon.svg">
-  <link rel="stylesheet" href="/styles.css">
-  <title>Family Tea Planner</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#245b45">
+<title>Family Tea Planner</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="topbar">
-    <div class="brand"><div class="brandmark">🍽️</div><div><strong>Tea Time</strong><small>Family meal planner</small></div></div>
-    <button id="settingsBtn" class="icon-btn" aria-label="Settings">⚙</button>
-  </header>
-  <main>
-    <section class="hero">
-      <div class="eyebrow">LESS STRESS. MORE TEA.</div>
-      <h1>What's for tea<br><em>this week?</em></h1>
-      <p>Seven family dinners, one clever shopping list.</p>
-      <div class="hero-meta"><span>👨‍👩‍👧‍👦 Serves 4</span><span>🎯 £45–£55 target</span><span>✨ AI powered</span></div>
-    </section>
-
-    <section class="toolbar">
-      <div><div class="eyebrow">YOUR WEEK</div><h2 id="weekTitle">Ready when you are</h2></div>
-      <button id="generateBtn" class="primary">✦ Make my week</button>
-    </section>
-    <div id="status" class="status" role="status">Tap “Make my week” to create your first menu.</div>
-
-    <section id="planSection" hidden>
-      <div class="budget-card">
-        <div><span class="eyebrow">ESTIMATED SHOP</span><div class="budget" id="budget">£—</div><small id="budgetNote"></small></div>
-        <div class="budget-icon">🛒</div>
-      </div>
-      <div class="section-heading"><div><div class="eyebrow">MONDAY TO SUNDAY</div><h2>The dinner line-up</h2></div></div>
-      <div id="meals" class="meals"></div>
-      <div class="section-heading shopping-head"><div><div class="eyebrow">ONE LIST. NO DOUBLES.</div><h2>Shopping list</h2><p id="progress">0 items ticked off</p></div><button id="copyBtn" class="secondary">Copy list</button></div>
-      <div id="shopping" class="shopping"></div>
-      <div class="bottom-actions"><button id="newWeekBtn" class="primary wide">✦ Generate another week</button></div>
-    </section>
-    <footer>Made for busy family evenings. Prices are estimates, not live supermarket quotes.</footer>
-  </main>
-
-  <dialog id="settingsDialog">
-    <form method="dialog" class="dialog-inner">
-      <div class="dialog-title"><div><div class="eyebrow">MAKE IT YOURS</div><h2>Meal preferences</h2></div><button class="icon-btn" aria-label="Close">✕</button></div>
-      <label for="preferences">Anything the family likes, dislikes or avoids?</label>
-      <textarea id="preferences" rows="4" placeholder="e.g. No mushrooms, kids love chicken, one vegetarian night..."></textarea>
-      <p class="hint">Preferences are sent with your request to the AI to shape each new plan.</p>
-      <button id="saveSettings" class="primary wide">Save preferences</button>
-    </form>
-  </dialog>
-
-  <dialog id="recipeDialog">
-    <div class="dialog-inner">
-      <div class="dialog-title"><div><div class="eyebrow" id="recipeDay"></div><h2 id="recipeName"></h2></div><button id="closeRecipe" class="icon-btn">✕</button></div>
-      <p id="recipeDescription" class="recipe-desc"></p>
-      <div class="recipe-meta" id="recipeMeta"></div>
-      <h3>Ingredients</h3><ul id="recipeIngredients"></ul>
-      <h3>Method</h3><ol id="recipeMethod"></ol>
-      <button id="swapBtn" class="secondary wide">↻ Swap this meal</button>
+<header>
+  <div class="eyebrow">LESS STRESS, CHEAPER TEAS</div>
+  <h1>Family Tea Planner</h1>
+  <p>Tell ChatGPT what your family likes and get a practical weekly plan.</p>
+</header>
+<main>
+  <section class="panel">
+    <h2>Your week</h2>
+    <label>How many people are you feeding?
+      <input id="people" type="number" min="1" max="12" value="4">
+    </label>
+    <label>Budget for 7 evening meals (£)
+      <input id="budget" type="number" min="10" max="300" value="50">
+    </label>
+    <label>Any dietary needs?
+      <input id="diet" type="text" placeholder="e.g. vegetarian, dairy-free, none">
+    </label>
+    <label>Foods your family dislikes
+      <textarea id="dislikes" rows="2" placeholder="e.g. mushrooms, fish, spicy food"></textarea>
+    </label>
+    <label>Meals or ingredients you'd like included
+      <textarea id="likes" rows="2" placeholder="e.g. chicken, pasta, jacket potatoes"></textarea>
+    </label>
+    <button id="make">Create my AI meal plan in ChatGPT</button>
+    <p class="hint">This opens ChatGPT with your request ready to send. No separate AI subscription or API key is needed, but you need access to ChatGPT.</p>
+  </section>
+  <section class="panel">
+    <h2>Save your plan here</h2>
+    <p class="hint">After ChatGPT creates your plan, copy its shopping list or notes and paste them below so you can keep them handy on this phone.</p>
+    <textarea id="saved" rows="9" placeholder="Paste your meal plan or shopping list here..."></textarea>
+    <div class="actions">
+      <button class="secondary" id="save">Save on this iPhone</button>
+      <button class="secondary" id="clear">Clear</button>
     </div>
-  </dialog>
-  <script src="/app.js"></script>
+    <p id="status" role="status" aria-live="polite"></p>
+  </section>
+</main>
+<footer>Tip: In Safari, use Share → Add to Home Screen to keep this planner on your iPhone.</footer>
+<script src="app.js"></script>
 </body>
 </html>
