@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f5f3ed">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Tea Planner">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="apple-touch-icon" href="/icon.svg">
+  <link rel="stylesheet" href="/styles.css">
+  <title>Family Tea Planner</title>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><div class="brandmark">🍽️</div><div><strong>Tea Time</strong><small>Family meal planner</small></div></div>
+    <button id="settingsBtn" class="icon-btn" aria-label="Settings">⚙</button>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="eyebrow">LESS STRESS. MORE TEA.</div>
+      <h1>What's for tea<br><em>this week?</em></h1>
+      <p>Seven family dinners, one clever shopping list.</p>
+      <div class="hero-meta"><span>👨‍👩‍👧‍👦 Serves 4</span><span>🎯 £45–£55 target</span><span>✨ AI powered</span></div>
+    </section>
+
+    <section class="toolbar">
+      <div><div class="eyebrow">YOUR WEEK</div><h2 id="weekTitle">Ready when you are</h2></div>
+      <button id="generateBtn" class="primary">✦ Make my week</button>
+    </section>
+    <div id="status" class="status" role="status">Tap “Make my week” to create your first menu.</div>
+
+    <section id="planSection" hidden>
+      <div class="budget-card">
+        <div><span class="eyebrow">ESTIMATED SHOP</span><div class="budget" id="budget">£—</div><small id="budgetNote"></small></div>
+        <div class="budget-icon">🛒</div>
+      </div>
+      <div class="section-heading"><div><div class="eyebrow">MONDAY TO SUNDAY</div><h2>The dinner line-up</h2></div></div>
+      <div id="meals" class="meals"></div>
+      <div class="section-heading shopping-head"><div><div class="eyebrow">ONE LIST. NO DOUBLES.</div><h2>Shopping list</h2><p id="progress">0 items ticked off</p></div><button id="copyBtn" class="secondary">Copy list</button></div>
+      <div id="shopping" class="shopping"></div>
+      <div class="bottom-actions"><button id="newWeekBtn" class="primary wide">✦ Generate another week</button></div>
+    </section>
+    <footer>Made for busy family evenings. Prices are estimates, not live supermarket quotes.</footer>
+  </main>
+
+  <dialog id="settingsDialog">
+    <form method="dialog" class="dialog-inner">
+      <div class="dialog-title"><div><div class="eyebrow">MAKE IT YOURS</div><h2>Meal preferences</h2></div><button class="icon-btn" aria-label="Close">✕</button></div>
+      <label for="preferences">Anything the family likes, dislikes or avoids?</label>
+      <textarea id="preferences" rows="4" placeholder="e.g. No mushrooms, kids love chicken, one vegetarian night..."></textarea>
+      <p class="hint">Preferences are sent with your request to the AI to shape each new plan.</p>
+      <button id="saveSettings" class="primary wide">Save preferences</button>
+    </form>
+  </dialog>
+
+  <dialog id="recipeDialog">
+    <div class="dialog-inner">
+      <div class="dialog-title"><div><div class="eyebrow" id="recipeDay"></div><h2 id="recipeName"></h2></div><button id="closeRecipe" class="icon-btn">✕</button></div>
+      <p id="recipeDescription" class="recipe-desc"></p>
+      <div class="recipe-meta" id="recipeMeta"></div>
+      <h3>Ingredients</h3><ul id="recipeIngredients"></ul>
+      <h3>Method</h3><ol id="recipeMethod"></ol>
+      <button id="swapBtn" class="secondary wide">↻ Swap this meal</button>
+    </div>
+  </dialog>
+  <script src="/app.js"></script>
+</body>
+</html>
